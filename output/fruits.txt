@@ -1,0 +1,18 @@
+# Fruits unsorted
+honeycrisp, red
+grannysmith, green
+cavendish, yellow
+apple, yellow
+
+# Fruits sorted by name
+apple, yellow
+cavendish, yellow
+grannysmith, green
+honeycrisp, red
+
+
+# Fruits sorted by color
+grannysmith, green
+honeycrisp, red
+cavendish, yellow
+apple, yellow

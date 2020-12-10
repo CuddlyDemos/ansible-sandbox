@@ -1,0 +1,15 @@
+# Fruits unsorted
+{% for item in list_of_fruits %}
+{{ item.name }}, {{ item.color }}
+{% endfor %}
+
+# Fruits sorted by name
+{% for item in list_of_fruits | sort(attribute='name') %}
+{{ item.name }}, {{ item.color }}
+{% endfor %}
+
+
+# Fruits sorted by color
+{% for item in list_of_fruits | sort(attribute='color') %}
+{{ item.name }}, {{ item.color }}
+{% endfor %}
