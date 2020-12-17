@@ -1,0 +1,17 @@
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  become: false
+  vars_files:
+    - vars.yaml
+
+  tasks:
+    - name: sort list of fruit and calc checksum
+      set_fact:
+        fruits_checksum: "{{ list_of_fruits | sort(attribute='name') | checksum }}"
+
+    - name: print fruits_checksum
+      debug:
+        var: fruits_checksum

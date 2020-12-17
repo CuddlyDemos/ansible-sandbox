@@ -1,0 +1,46 @@
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: run shell command and register output
+      shell: |
+        echo "hello\nworld!"
+      register: shell_output
+
+    - name: print all of shell_output return values
+      debug:
+        var: shell_output
+
+    - name: print shell_output stdout
+      debug:
+        var: shell_output.stdout
+
+    - name: print shell_output stdout_lines
+      debug:
+        var: shell_output.stdout_lines
+
+    - name: get json from url
+      uri:
+        url: https://httpbin.org/json
+        return_content: true
+      register: url_data
+
+    - name: print url_data
+      debug:
+        var: url_data
+
+    - name: print url_data json
+      debug:
+        var: url_data.json
+
+    - name: set fact for title of slideshow
+      set_fact:
+        title: "{{ url_data.json.slideshow.title }}"
+
+    - name: print title
+      debug:
+        var: title

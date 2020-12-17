@@ -1,0 +1,13 @@
+list_of_fruits:
+  - name: honeycrisp
+    color: red
+    category: apples
+  - name: grannysmith
+    color: green
+    category: apples
+  - name: cavendish
+    color: yellow
+    category: bananas
+  - name: apple
+    color: yellow
+    category: bananas
