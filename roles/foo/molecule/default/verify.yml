@@ -1,0 +1,23 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  tasks:
+  - name: get systemd info for nginx
+    ansible.builtin.systemd:
+      name: nginx.service
+    register: nginx_systemd_info
+
+  - name: get index
+    ansible.builtin.uri:
+      url: http://localhost/index.html
+      return_content: true
+    register: index_info
+
+  - name: assertion
+    ansible.builtin.assert:
+      that:
+        - nginx_systemd_info.status.ActiveState == "active"
+        - nginx_systemd_info.status.WantedBy == "multi-user.target"
+        - "ansible_hostname in index_info.content"

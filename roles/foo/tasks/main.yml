@@ -1,0 +1,20 @@
+---
+# tasks file for foo
+
+- name: install nginx
+  ansible.builtin.apt:
+    name: nginx
+
+- name: start nginx
+  ansible.builtin.systemd:
+    name: nginx.service
+    state: started
+    enabled: true
+
+- name: create site
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: '0644'

@@ -5,8 +5,12 @@ name = "pypi"
 
 [packages]
 ansible = "*"
+docker = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.8"
+
+[packages.molecule]
+extras = [ "docker",]
