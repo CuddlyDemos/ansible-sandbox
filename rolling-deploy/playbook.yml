@@ -1,0 +1,47 @@
+---
+
+- name: rolling deploy demo
+  hosts: web
+  gather_facts: false
+  any_errors_fatal: true
+  become: true
+  serial: 1
+
+  pre_tasks:
+  - name: setup alertmanager downtime
+    debug:
+      msg: "insert tasks here"
+
+  - name: remove host from load balaner
+    shell: |
+      echo "gcloud command to remove neg from load balancer"
+    delegate_to: localhost
+    become: false
+
+  tasks:
+  - name: insert tasks here
+    debug:
+      msg: "this would call the role, etc"
+
+  post_tasks:
+  - name: check the status of node
+    shell: |
+      /bin/true
+    register: health_status
+
+  - name: add host to load balancer
+    shell : |
+      echo "gcloud command to add neg to load balancer"
+    delegate_to: localhost
+    become: false
+    when: health_status.rc == 0
+
+  - name: remove alertmanager downtime
+    debug:
+      msg: "insert task here"
+    when: health_status.rc == 0
+
+  - name: abort play if host is not healthy
+    fail:
+      msg: "{{ inventory_hostname }} is not healthy. Aborting play"
+    when: health_status.rc != 0

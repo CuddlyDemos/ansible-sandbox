@@ -1,0 +1,14 @@
+---
+boxes:
+- name: web-1
+  box: generic/debian10
+  ram: 512
+  ip: 172.17.8.101
+- name: web-2
+  box: generic/debian10
+  ram: 512
+  ip: 172.17.8.102
+- name: web-3
+  box: generic/debian10
+  ram: 512
+  ip: 172.17.8.103
