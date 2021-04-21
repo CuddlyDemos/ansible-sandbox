@@ -1,6 +1,16 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/python,ansible,vscode
-# Edit at https://www.toptal.com/developers/gitignore?templates=python,ansible,vscode
+# Created by https://www.toptal.com/developers/gitignore/api/python,ansible,vscode,vagrant
+# Edit at https://www.toptal.com/developers/gitignore?templates=python,ansible,vscode,vagrant
+
+### Vagrant ###
+# General
+.vagrant/
+
+# Log files (if you are creating logs in debug mode, uncomment this)
+# *.log
+
+### Vagrant Patch ###
+*.box
 
 ### Ansible ###
 *.retry
