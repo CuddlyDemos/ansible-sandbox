@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+# # vi: set ft=ruby :
+
+# Specify minimum Vagrant version and Vagrant API version
+Vagrant.require_version ">= 1.6.0"
+VAGRANTFILE_API_VERSION = "2"
+
+# Require YAML module
+require 'yaml'
+
+# Read YAML file with box details
+data = YAML.load_file(File.join(File.dirname(__FILE__), 'data.yaml'))
+boxes = data['boxes']
+
+# Create boxes
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.ssh.insert_key = false
+
+  boxes.each do |box|
+    config.vm.define box["name"] do |srv|
+      srv.vm.box = box["box"]
+      srv.vm.network "private_network", ip: box["ip"]
+      srv.vm.provider :virtualbox do |vb|
+        vb.name = box["name"]
+        vb.memory = box["ram"]
+      end
+    end
+  end
+end
