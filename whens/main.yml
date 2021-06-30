@@ -1,0 +1,37 @@
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  become: false
+  vars:
+    foo: false
+
+  tasks:
+    - name: print value of foo
+      debug:
+        msg: "foo is {{ foo | bool }}"
+
+    - name: print when false
+      debug:
+        msg: "Printing when foo is 'False'"
+      when:
+        - foo is defined
+        - not foo | bool
+
+    - name: print my long ass thing
+      debug:
+        msg: "{{ foo | ternary('first', 'second') }}"
+
+    - name: gather service facts
+      ansible.builtin.service_facts:
+
+    - name: print service facts
+      debug:
+        msg: "{{ ansible_facts.services.keys() }}"
+
+    - name: print messag when syslog.service in services.keys()
+      debug:
+        msg: "It's there!"
+      when:
+      - '"syslog.service" in ansible_facts.services.keys()'
